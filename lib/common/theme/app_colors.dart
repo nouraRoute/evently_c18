@@ -7,6 +7,7 @@ class AppColors {
   static const Color mainTextLightMode = Color(0xff1C1C1C);
   static const Color strokeLightMode = Color(0xffF0F0F0);
   static const Color secTextLightMode = Color(0xff686868);
+  static const Color secTextDarkMode = Color(0xffD6D6D6);
   static const Color success = Color(0xff2ECC71);
   static const Color warning = Color(0xffF2994A);
   static const Color red = Color(0xffFF3232);

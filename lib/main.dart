@@ -1,10 +1,15 @@
 import 'package:evently_c18/common/theme/app_themes.dart';
+import 'package:evently_c18/firebase_options.dart';
 import 'package:evently_c18/screens/auth/login_screen.dart';
 import 'package:evently_c18/screens/auth/register_screen.dart';
 import 'package:evently_c18/screens/auth/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -24,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: AppThemes.lightTheme,
 
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
     );
   }
 }

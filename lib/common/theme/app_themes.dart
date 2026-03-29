@@ -4,7 +4,16 @@ import 'package:flutter/material.dart';
 
 class AppThemes {
   static final ThemeData lightTheme = ThemeData(
-    colorSchemeSeed: AppColors.mainLightMode,
+    colorScheme: ColorScheme.fromSeed(
+      primary: AppColors.mainLightMode,
+      seedColor: AppColors.mainLightMode,
+      brightness: Brightness.light,
+      inversePrimary: AppColors.mainLightMode,
+    ),
+    disabledColor: AppColors.disable,
+    hintColor: AppColors.secTextLightMode,
+    cardColor: Colors.white,
+    dividerColor: AppColors.strokeLightMode,
     scaffoldBackgroundColor: AppColors.lightBg,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.lightBg,
@@ -35,7 +44,17 @@ class AppThemes {
     ),
   );
   static final ThemeData darkTheme = ThemeData(
-    colorSchemeSeed: AppColors.mainDarkMode,
+    colorScheme: ColorScheme.fromSeed(
+      primary: AppColors.mainDarkMode,
+      seedColor: AppColors.mainDarkMode,
+      brightness: Brightness.dark,
+      inversePrimary: Colors.white,
+    ),
+
+    hintColor: AppColors.secTextDarkMode,
+    disabledColor: AppColors.disable,
+    dividerColor: AppColors.strokeDarkMode,
+    cardColor: AppColors.inputs,
     scaffoldBackgroundColor: AppColors.darkBg,
     appBarTheme: AppBarTheme(
       centerTitle: true,
