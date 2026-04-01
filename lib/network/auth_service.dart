@@ -1,0 +1,64 @@
+import 'package:evently_c18/models/custom_user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class AuthService {
+  static Future<String?> login(String emailAddress, String password) async {
+    try {
+      UserCredential credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: emailAddress, password: password);
+      // throw "x";
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        return 'Wrong password provided for that user.';
+      } else if (e.code == "invalid-credential") {
+        return "wrong email or password";
+      }
+      print('CODE:->${e.code}');
+
+      return "${e.code.replaceAll("-", " ")}";
+    } catch (e) {
+      print("ERROR:->$e");
+      return "something went wring";
+    }
+  }
+
+  static Future<String?> register(CustomUserModel user, String password) async {
+    try {
+      UserCredential credintials = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: user.email,
+            password: password,
+          );
+      user.uid = credintials.user!.uid;
+      await createUser(user);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        return ('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        return ('The account already exists for that email.');
+      }
+      print("CODE:->${e.code}");
+      return (" ${e.code}");
+    } catch (e) {
+      print("ERROR:->$e");
+      return ('$e');
+    }
+  }
+
+  // getUser() {}
+  static createUser(CustomUserModel user) async {
+    // CollectionReference users = FirebaseFirestore.instance.collection('users');
+    CollectionReference collection = FirebaseFirestore.instance.collection(
+      "users",
+    );
+    print('-->${user.uid}');
+    DocumentReference doc = collection.doc(user.uid);
+    await doc.set({"namde": "kkk"});
+    // await collection.add(doc);
+  }
+
+  forgotPAssword() {}
+}

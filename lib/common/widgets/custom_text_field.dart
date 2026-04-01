@@ -7,11 +7,14 @@ class CustomTextField extends StatefulWidget {
     required this.hintText,
     required this.prefixIconPath,
     this.isPassword = false,
+    this.controller,
+    this.validator,
   });
   final String hintText;
   final String prefixIconPath;
   final bool isPassword;
-
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
@@ -23,9 +26,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return TextFormField(
+      controller: widget.controller,
       obscureText: isObscured,
       enableSuggestions: !widget.isPassword,
       autocorrect: !widget.isPassword,
+      validator: widget.validator,
       onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
       decoration: InputDecoration(
         hintText: widget.hintText,

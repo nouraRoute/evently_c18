@@ -1,4 +1,5 @@
 import 'package:evently_c18/common/gen/assets.gen.dart';
+import 'package:evently_c18/screens/auth/login_screen.dart';
 import 'package:evently_c18/screens/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 onEnd: () {
                   Navigator.pushReplacementNamed(
                     context,
-                    RegisterScreen.routeName,
+                    LoginScreen.routeName,
                   );
                 },
                 child: Assets.images.appLogo.image(),
