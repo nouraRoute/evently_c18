@@ -9,6 +9,7 @@ import 'package:evently_c18/screens/auth/register_screen.dart';
 import 'package:evently_c18/screens/home/home_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -108,23 +109,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           isLoading = false;
                         });
                         if (errorMEssage != null) {
-                          SnackBar snackBar = SnackBar(
-                            content: Text(errorMEssage),
-                            duration: const Duration(seconds: 2),
-
+                          //toast
+                          Fluttertoast.showToast(
+                            msg: errorMEssage,
                             backgroundColor: AppColors.red,
+                            toastLength: Toast.LENGTH_LONG,
                           );
-
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(
-                              context,
-                            ).showSnackBar(snackBar);
-                          }
                         } else {
                           if (context.mounted) {
-                            Navigator.of(
+                            Navigator.pushReplacementNamed(
                               context,
-                            ).pushReplacementNamed(HomeScreen.routeName);
+                              HomeScreen.routeName,
+                            );
                           }
                         }
                       }

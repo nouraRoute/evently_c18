@@ -1,6 +1,8 @@
 import 'package:evently_c18/common/gen/assets.gen.dart';
 import 'package:evently_c18/screens/auth/login_screen.dart';
 import 'package:evently_c18/screens/auth/register_screen.dart';
+import 'package:evently_c18/screens/home/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -40,10 +42,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
                 width: animate ? 300 : 0,
                 onEnd: () {
-                  Navigator.pushReplacementNamed(
-                    context,
-                    LoginScreen.routeName,
-                  );
+                  if (FirebaseAuth.instance.currentUser?.uid != null) {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      HomeScreen.routeName,
+                    );
+                  } else {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      LoginScreen.routeName,
+                    );
+                  }
                 },
                 child: Assets.images.appLogo.image(),
               ),

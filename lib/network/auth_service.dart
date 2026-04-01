@@ -48,16 +48,32 @@ class AuthService {
     }
   }
 
-  // getUser() {}
-  static createUser(CustomUserModel user) async {
-    // CollectionReference users = FirebaseFirestore.instance.collection('users');
-    CollectionReference collection = FirebaseFirestore.instance.collection(
-      "users",
+  static Future<CustomUserModel?> getUser() async {
+    CollectionReference<CustomUserModel> collection = _getUsersCollection();
+    DocumentReference<CustomUserModel> doc = collection.doc(
+      FirebaseAuth.instance.currentUser?.uid,
     );
-    print('-->${user.uid}');
+    DocumentSnapshot<CustomUserModel> docSnapshot = await doc.get();
+    print('----DONE---->${docSnapshot.data()}');
+    return docSnapshot.data();
+  }
+
+  static Future createUser(CustomUserModel user) async {
+    CollectionReference<CustomUserModel> collection = _getUsersCollection();
+
     DocumentReference doc = collection.doc(user.uid);
-    await doc.set({"namde": "kkk"});
-    // await collection.add(doc);
+    await doc.set(user);
+  }
+
+  static CollectionReference<CustomUserModel> _getUsersCollection() {
+    CollectionReference<CustomUserModel> collection = FirebaseFirestore.instance
+        .collection("users")
+        .withConverter<CustomUserModel>(
+          fromFirestore: (snapshot, options) =>
+              CustomUserModel.fromJson(snapshot.data() ?? {}),
+          toFirestore: (value, options) => value.toJson(),
+        );
+    return collection;
   }
 
   forgotPAssword() {}

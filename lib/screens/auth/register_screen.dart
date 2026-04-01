@@ -135,7 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if (context.mounted) {
                             Navigator.of(
                               context,
-                            ).pushReplacementNamed(HomeScreen.routeName);
+                            ).pushReplacementNamed(LoginScreen.routeName);
                           }
                         }
                       }

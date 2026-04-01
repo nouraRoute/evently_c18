@@ -3,4 +3,15 @@ class CustomUserModel {
   String email;
   String? uid;
   CustomUserModel({required this.name, required this.email, this.uid});
+  static CustomUserModel fromJson(Map json) {
+    return CustomUserModel(
+      name: json['name'],
+      email: json['email'],
+      uid: json['uid'],
+    );
+  }
+
+  Map<String, Object?> toJson() {
+    return {"name": name, "email": email, "uid": uid};
+  }
 }
