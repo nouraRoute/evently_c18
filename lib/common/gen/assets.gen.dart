@@ -17,17 +17,65 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/birthday-icon.svg
+  SvgGenImage get birthdayIcon =>
+      const SvgGenImage('assets/icons/birthday-icon.svg');
+
+  /// File path: assets/icons/book.svg
+  SvgGenImage get book => const SvgGenImage('assets/icons/book.svg');
+
+  /// File path: assets/icons/heart_selected.svg
+  SvgGenImage get heartSelected =>
+      const SvgGenImage('assets/icons/heart_selected.svg');
+
+  /// File path: assets/icons/heart_unselected.svg
+  SvgGenImage get heartUnselected =>
+      const SvgGenImage('assets/icons/heart_unselected.svg');
+
+  /// File path: assets/icons/home_selected.svg
+  SvgGenImage get homeSelected =>
+      const SvgGenImage('assets/icons/home_selected.svg');
+
+  /// File path: assets/icons/home_unselecte.svg
+  SvgGenImage get homeUnselecte =>
+      const SvgGenImage('assets/icons/home_unselecte.svg');
+
   /// File path: assets/icons/lock.svg
   SvgGenImage get lock => const SvgGenImage('assets/icons/lock.svg');
 
   /// File path: assets/icons/sms.svg
   SvgGenImage get sms => const SvgGenImage('assets/icons/sms.svg');
 
+  /// File path: assets/icons/sports-icon-unselected.svg
+  SvgGenImage get sportsIconUnselected =>
+      const SvgGenImage('assets/icons/sports-icon-unselected.svg');
+
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
+  /// File path: assets/icons/user_selected.svg
+  SvgGenImage get userSelected =>
+      const SvgGenImage('assets/icons/user_selected.svg');
+
+  /// File path: assets/icons/user_unselected.svg
+  SvgGenImage get userUnselected =>
+      const SvgGenImage('assets/icons/user_unselected.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [lock, sms, user];
+  List<SvgGenImage> get values => [
+    birthdayIcon,
+    book,
+    heartSelected,
+    heartUnselected,
+    homeSelected,
+    homeUnselecte,
+    lock,
+    sms,
+    sportsIconUnselected,
+    user,
+    userSelected,
+    userUnselected,
+  ];
 }
 
 class $AssetsImagesGen {
@@ -41,12 +89,31 @@ class $AssetsImagesGen {
   AssetGenImage get appLogo =>
       const AssetGenImage('assets/images/app_logo.png');
 
+  /// File path: assets/images/birthday_designe.png
+  AssetGenImage get birthdayDesigne =>
+      const AssetGenImage('assets/images/birthday_designe.png');
+
+  /// File path: assets/images/book_club.png
+  AssetGenImage get bookClub =>
+      const AssetGenImage('assets/images/book_club.png');
+
   /// File path: assets/images/google_icon.png
   AssetGenImage get googleIcon =>
       const AssetGenImage('assets/images/google_icon.png');
 
+  /// File path: assets/images/sports_designe.png
+  AssetGenImage get sportsDesigne =>
+      const AssetGenImage('assets/images/sports_designe.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [routeLogo, appLogo, googleIcon];
+  List<AssetGenImage> get values => [
+    routeLogo,
+    appLogo,
+    birthdayDesigne,
+    bookClub,
+    googleIcon,
+    sportsDesigne,
+  ];
 }
 
 class Assets {

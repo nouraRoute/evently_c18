@@ -23,6 +23,19 @@ class AppThemes {
         color: AppColors.mainTextLightMode,
       ),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedLabelStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        fontFamily: "Poppins",
+        color: AppColors.mainLightMode,
+      ),
+      selectedItemColor: AppColors.mainLightMode,
+      unselectedItemColor: AppColors.disable,
+      unselectedLabelStyle: AppTextStyles.style12w400Black.copyWith(
+        color: AppColors.disable,
+      ),
+    ),
     actionIconTheme: ActionIconThemeData(
       backButtonIconBuilder: (BuildContext context) => Container(
         width: 32,
@@ -74,6 +87,14 @@ class AppThemes {
           border: Border.all(color: AppColors.strokeDarkMode),
         ),
         child: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+      ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedLabelStyle: AppTextStyles.style12w400Black.copyWith(
+        color: AppColors.mainDarkMode,
+      ),
+      unselectedLabelStyle: AppTextStyles.style12w400Black.copyWith(
+        color: AppColors.disable,
       ),
     ),
     textTheme: _generateTextTheme(AppColors.mainTextDarkMode),
