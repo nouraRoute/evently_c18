@@ -5,8 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AuthService {
   static Future<String?> login(String emailAddress, String password) async {
     try {
-      UserCredential credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: emailAddress, password: password);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailAddress,
+        password: password,
+      );
       // throw "x";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -23,6 +25,7 @@ class AuthService {
       print("ERROR:->$e");
       return "something went wring";
     }
+    return null;
   }
 
   static Future<String?> register(CustomUserModel user, String password) async {
@@ -46,6 +49,7 @@ class AuthService {
       print("ERROR:->$e");
       return ('$e');
     }
+    return null;
   }
 
   static Future<CustomUserModel?> getUser() async {
