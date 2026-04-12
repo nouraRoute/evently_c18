@@ -8,8 +8,7 @@ class EventService {
     CollectionReference<EventModel> collection = FirebaseFirestore.instance
         .collection("events")
         .withConverter<EventModel>(
-          fromFirestore: (snapshot, options) =>
-              EventModel.fromJson(snapshot.data() ?? {}),
+          fromFirestore: (snapshot, options) => EventModel.fromJson(snapshot.data() ?? {}),
           toFirestore: (value, options) => value.toJson(),
         );
     return collection;
@@ -39,8 +38,16 @@ class EventService {
 
   static Future<List<EventModel>> getFilteredEvents(int id) async {
     CollectionReference<EventModel> collection = _getEventsCollection();
+    QuerySnapshot<EventModel> snapshots = await collection.where("catId", isEqualTo: id).get();
+    List<QueryDocumentSnapshot<EventModel>> docs = snapshots.docs;
+    List<EventModel> events = docs.map((e) => e.data()).toList();
+    return events;
+  }
+
+  static Future<List<EventModel>> getWishlistEvents() async {
+    CollectionReference<EventModel> collection = _getEventsCollection();
     QuerySnapshot<EventModel> snapshots = await collection
-        .where("catId", isEqualTo: id)
+        .where("wishlist", arrayContains: FirebaseAuth.instance.currentUser!.uid)
         .get();
     List<QueryDocumentSnapshot<EventModel>> docs = snapshots.docs;
     List<EventModel> events = docs.map((e) => e.data()).toList();

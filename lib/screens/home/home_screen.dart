@@ -1,5 +1,6 @@
 import 'package:evently_c18/common/gen/assets.gen.dart';
 import 'package:evently_c18/common/theme/text_styles.dart';
+import 'package:evently_c18/provider/theme_provider.dart';
 import 'package:evently_c18/screens/events/add_new_event/add_new_event_screen.dart';
 import 'package:evently_c18/screens/home/tabs/fav_tab/fav_tab.dart';
 import 'package:evently_c18/screens/home/tabs/home_tab/home_provider.dart';
@@ -30,9 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (BuildContext context, HomeProvider value, Widget? child) =>
               FloatingActionButton(
                 onPressed: () async {
-                  final res = await Navigator.of(
-                    context,
-                  ).pushNamed(AddNewEventScreen.routeName);
+                  final res = await Navigator.of(context).pushNamed(AddNewEventScreen.routeName);
                   if (res == true) {
                     value.getEvents();
                   }
@@ -47,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 centerTitle: false,
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<ThemeProvider>(context).updateTheme();
+                    },
                     icon: Icon(Icons.wb_sunny_outlined),
                   ),
                   SizedBox(
@@ -66,9 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: Text(
                         "EN",
-                        style: AppTextStyles.style14w600Black.copyWith(
-                          color: Colors.white,
-                        ),
+                        style: AppTextStyles.style14w600Black.copyWith(color: Colors.white),
                       ),
                     ),
                   ),
@@ -79,9 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       "Welcome Back ✨",
-                      style: theme.textTheme.labelSmall!.copyWith(
-                        color: theme.hintColor,
-                      ),
+                      style: theme.textTheme.labelSmall!.copyWith(color: theme.hintColor),
                     ),
                     Text(
                       "Name", //TODO:with provider
@@ -94,10 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             : null,
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: tabs[index],
-          ),
+          child: Padding(padding: const EdgeInsets.all(16.0), child: tabs[index]),
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
