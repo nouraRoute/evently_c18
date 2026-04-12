@@ -34,4 +34,13 @@ class CategoryModel {
       ),
     ];
   }
+
+  static String getCatImage(int id) {
+    List<CategoryModel> categories = generateCategories();
+    if (id == 1) return categories[0].image;
+    if (id == 2) return categories[1].image;
+    if (id == 3) return categories[2].image;
+    if (id == 4) return categories[3].image;
+    return categories[0].image;
+  }
 }
