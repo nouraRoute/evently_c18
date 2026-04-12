@@ -5,14 +5,18 @@ class CustomTextField extends StatefulWidget {
   const CustomTextField({
     super.key,
     required this.hintText,
-    required this.prefixIconPath,
+    this.prefixIconPath,
     this.isPassword = false,
     this.controller,
     this.validator,
+    this.titleText,
+    this.maxLines,
   });
   final String hintText;
-  final String prefixIconPath;
+  final String? titleText;
+  final String? prefixIconPath;
   final bool isPassword;
+  final int? maxLines;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   @override
@@ -25,57 +29,73 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return TextFormField(
-      controller: widget.controller,
-      obscureText: isObscured,
-      enableSuggestions: !widget.isPassword,
-      autocorrect: !widget.isPassword,
-      validator: widget.validator,
-      onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
-      decoration: InputDecoration(
-        hintText: widget.hintText,
-        filled: true,
-        fillColor: theme.cardColor,
-        prefixIcon: Padding(
-          padding: EdgeInsetsGeometry.only(
-            left: 16,
-            top: 12,
-            bottom: 12,
-            right: 8,
-          ),
-          child: _isSvg(widget.prefixIconPath)
-              ? SvgPicture.asset(
-                  widget.prefixIconPath,
-                  colorFilter: ColorFilter.mode(
-                    theme.disabledColor,
-                    BlendMode.srcIn,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 8,
+      children: [
+        if (widget.titleText != null)
+          Text(widget.titleText ?? '', style: theme.textTheme.titleMedium),
+        TextFormField(
+          controller: widget.controller,
+          obscureText: isObscured,
+          enableSuggestions: !widget.isPassword,
+          autocorrect: !widget.isPassword,
+          validator: widget.validator,
+          maxLines: widget.maxLines,
+          onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+          decoration: InputDecoration(
+            hintText: widget.hintText,
+            filled: true,
+            fillColor: theme.cardColor,
+            prefixIcon: widget.prefixIconPath == null
+                ? null
+                : Padding(
+                    padding: EdgeInsetsGeometry.only(
+                      left: 16,
+                      top: 12,
+                      bottom: 12,
+                      right: 8,
+                    ),
+                    child: _isSvg(widget.prefixIconPath!)
+                        ? SvgPicture.asset(
+                            widget.prefixIconPath!,
+                            colorFilter: ColorFilter.mode(
+                              theme.disabledColor,
+                              BlendMode.srcIn,
+                            ),
+                          )
+                        : Image.asset(
+                            widget.prefixIconPath!,
+                            color: theme.disabledColor,
+                          ),
                   ),
-                )
-              : Image.asset(widget.prefixIconPath, color: theme.disabledColor),
+            suffixIcon: widget.isPassword
+                ? InkWell(
+                    onTap: () {
+                      setState(() {
+                        isObscured = !isObscured;
+                      });
+                    },
+                    child: Icon(
+                      isObscured
+                          ? Icons.visibility_off_outlined
+                          : Icons.remove_red_eye_outlined,
+                      color: theme.disabledColor,
+                    ),
+                  )
+                : null,
+            hintStyle: theme.textTheme.labelSmall!.copyWith(
+              color: theme.hintColor,
+            ),
+            border: _generateBorderStyle(theme),
+            enabledBorder: _generateBorderStyle(theme),
+            focusedBorder: _generateBorderStyle(
+              theme,
+              color: theme.colorScheme.primary,
+            ),
+          ),
         ),
-        suffixIcon: widget.isPassword
-            ? InkWell(
-                onTap: () {
-                  setState(() {
-                    isObscured = !isObscured;
-                  });
-                },
-                child: Icon(
-                  isObscured
-                      ? Icons.visibility_off_outlined
-                      : Icons.remove_red_eye_outlined,
-                  color: theme.disabledColor,
-                ),
-              )
-            : null,
-        hintStyle: theme.textTheme.labelSmall!.copyWith(color: theme.hintColor),
-        border: _generateBorderStyle(theme),
-        enabledBorder: _generateBorderStyle(theme),
-        focusedBorder: _generateBorderStyle(
-          theme,
-          color: theme.colorScheme.primary,
-        ),
-      ),
+      ],
     );
   }
 

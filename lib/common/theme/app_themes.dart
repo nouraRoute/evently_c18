@@ -38,16 +38,17 @@ class AppThemes {
     ),
     actionIconTheme: ActionIconThemeData(
       backButtonIconBuilder: (BuildContext context) => Container(
-        width: 32,
         height: 32,
+        width: 32,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
           border: Border.all(color: AppColors.strokeLightMode),
         ),
         child: Icon(
           Icons.arrow_back_ios_new_rounded,
           color: AppColors.mainLightMode,
+          size: 18,
         ),
       ),
     ),
@@ -83,10 +84,14 @@ class AppThemes {
         height: 32,
         decoration: BoxDecoration(
           color: AppColors.inputs,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
           border: Border.all(color: AppColors.strokeDarkMode),
         ),
-        child: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+        child: Icon(
+          Icons.arrow_back_ios_new_rounded,
+          size: 18,
+          color: Colors.white,
+        ),
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
