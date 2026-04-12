@@ -1,5 +1,6 @@
 import 'package:evently_c18/common/gen/assets.gen.dart';
 import 'package:evently_c18/common/theme/text_styles.dart';
+import 'package:evently_c18/l10n/app_localizations.dart';
 import 'package:evently_c18/provider/theme_provider.dart';
 import 'package:evently_c18/screens/events/add_new_event/add_new_event_screen.dart';
 import 'package:evently_c18/screens/home/tabs/fav_tab/fav_tab.dart';
@@ -31,7 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (BuildContext context, HomeProvider value, Widget? child) =>
               FloatingActionButton(
                 onPressed: () async {
-                  final res = await Navigator.of(context).pushNamed(AddNewEventScreen.routeName);
+                  final res = await Navigator.of(
+                    context,
+                  ).pushNamed(AddNewEventScreen.routeName);
                   if (res == true) {
                     value.getEvents();
                   }
@@ -47,7 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   IconButton(
                     onPressed: () {
-                      Provider.of<ThemeProvider>(context).updateTheme();
+                      Provider.of<ThemeProvider>(
+                        context,
+                        listen: false,
+                      ).updateTheme();
                     },
                     icon: Icon(Icons.wb_sunny_outlined),
                   ),
@@ -55,7 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 32,
                     width: 32,
                     child: FilledButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Provider.of<ThemeProvider>(
+                          context,
+                          listen: false,
+                        ).updateLanguage();
+                      },
 
                       style: FilledButton.styleFrom(
                         visualDensity: VisualDensity.compact,
@@ -66,8 +77,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       child: Text(
-                        "EN",
-                        style: AppTextStyles.style14w600Black.copyWith(color: Colors.white),
+                        AppLocalizations.of(context)!.localeName, //  == 'ar'
+                        //     ? "EN"
+                        //     : "AR", //   AppLocalizations.of(context)!.local,
+                        style: AppTextStyles.style14w600Black.copyWith(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -77,8 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Welcome Back ✨",
-                      style: theme.textTheme.labelSmall!.copyWith(color: theme.hintColor),
+                      AppLocalizations.of(
+                        context,
+                      )!.hello, //    "Welcome Back ✨",
+                      style: theme.textTheme.labelSmall!.copyWith(
+                        color: theme.hintColor,
+                      ),
                     ),
                     Text(
                       "Name", //TODO:with provider
@@ -91,7 +110,10 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             : null,
         body: SafeArea(
-          child: Padding(padding: const EdgeInsets.all(16.0), child: tabs[index]),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: tabs[index],
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
@@ -102,17 +124,17 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
               icon: Assets.icons.homeUnselecte.svg(),
               activeIcon: Assets.icons.homeSelected.svg(),
-              label: "Home",
+              label: AppLocalizations.of(context)!.home,
             ),
             BottomNavigationBarItem(
               icon: Assets.icons.heartUnselected.svg(),
               activeIcon: Assets.icons.heartSelected.svg(),
-              label: "Favorite",
+              label: AppLocalizations.of(context)!.fav,
             ),
             BottomNavigationBarItem(
               icon: Assets.icons.userUnselected.svg(),
               activeIcon: Assets.icons.userSelected.svg(),
-              label: "Profiles",
+              label: AppLocalizations.of(context)!.profile,
             ),
           ],
         ),

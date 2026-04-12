@@ -1,0 +1,9 @@
+{
+    "hello":"Hello",
+   "title_is_required": "title is required",
+   "home":"Home",
+   "profile":"Profile",
+   "fav":"Favorite",
+   "local":"AR"
+   
+   }

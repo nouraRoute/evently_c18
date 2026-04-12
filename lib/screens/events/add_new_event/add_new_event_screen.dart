@@ -2,6 +2,7 @@ import 'package:evently_c18/common/utils/shared_container_decoration.dart';
 import 'package:evently_c18/common/utils/validation_utils.dart';
 import 'package:evently_c18/common/widgets/custom_filled_button.dart';
 import 'package:evently_c18/common/widgets/custom_text_field.dart';
+import 'package:evently_c18/l10n/app_localizations.dart';
 import 'package:evently_c18/models/event_model.dart';
 import 'package:evently_c18/network/event_service.dart';
 import 'package:evently_c18/screens/events/add_new_event/category_row_widget.dart';
@@ -65,7 +66,9 @@ class _AddNewEventScreenState extends State<AddNewEventScreen> {
                             validator: (value) =>
                                 ValidationUtils.validateEmptyText(value)
                                 ? null
-                                : "title is required", //TODO:localizatio
+                                : AppLocalizations.of(
+                                    context,
+                                  )!.title_is_required, //TODO:localizatio
                           ),
                           CustomTextField(
                             titleText: "Description",

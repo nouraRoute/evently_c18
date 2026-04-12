@@ -67,12 +67,15 @@ class _EventCardState extends State<EventCard> {
                 ),
                 InkWell(
                   onTap: () async {
-                    setState(() {
-                      isFav = !isFav;
-                    });
                     if (isFav) {
+                      setState(() {
+                        isFav = !isFav;
+                      });
                       await EventService.removeFromWishlist(widget.eventModel);
                     } else {
+                      setState(() {
+                        isFav = !isFav;
+                      });
                       await EventService.addToWishlist(widget.eventModel);
                     }
                   },
