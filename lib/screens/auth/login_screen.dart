@@ -33,10 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SafeArea(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15.0,
-                vertical: 15,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
               child: ListView(
                 children: [
                   Center(child: Assets.images.appLogo.image(width: 150)),
@@ -56,8 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: (value) {
                       if (ValidationUtils.validateEmptyText(value) == false) {
                         return "empty email!!";
-                      } else if (ValidationUtils.validateEmail(value!) ==
-                          false) {
+                      } else if (ValidationUtils.validateEmail(value!) == false) {
                         return "invalid email";
                       }
                     },
@@ -67,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: "Enter your PAssword",
                     prefixIconPath: Assets.icons.lock.path,
                     isPassword: true,
+                    maxLines: 1,
                     controller: password,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -101,10 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           isLoading = true;
                         });
-                        String? errorMEssage = await AuthService.login(
-                          email.text,
-                          password.text,
-                        );
+                        String? errorMEssage = await AuthService.login(email.text, password.text);
                         setState(() {
                           isLoading = false;
                         });
@@ -117,10 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         } else {
                           if (context.mounted) {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              HomeScreen.routeName,
-                            );
+                            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
                           }
                         }
                       }
@@ -145,9 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ).pushReplacementNamed(RegisterScreen.routeName),
                           ),
                         ],
-                        style: theme.textTheme.labelSmall!.copyWith(
-                          color: theme.hintColor,
-                        ),
+                        style: theme.textTheme.labelSmall!.copyWith(color: theme.hintColor),
                       ),
                     ),
                   ),
@@ -155,9 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(
                     child: Text(
                       "OR",
-                      style: theme.textTheme.titleLarge!.copyWith(
-                        color: theme.colorScheme.primary,
-                      ),
+                      style: theme.textTheme.titleLarge!.copyWith(color: theme.colorScheme.primary),
                     ),
                   ),
                   SizedBox(height: 24),

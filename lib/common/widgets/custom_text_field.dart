@@ -10,7 +10,7 @@ class CustomTextField extends StatefulWidget {
     this.controller,
     this.validator,
     this.titleText,
-    this.maxLines,
+    this.maxLines = 1,
   });
   final String hintText;
   final String? titleText;
@@ -50,24 +50,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
             prefixIcon: widget.prefixIconPath == null
                 ? null
                 : Padding(
-                    padding: EdgeInsetsGeometry.only(
-                      left: 16,
-                      top: 12,
-                      bottom: 12,
-                      right: 8,
-                    ),
+                    padding: EdgeInsetsGeometry.only(left: 16, top: 12, bottom: 12, right: 8),
                     child: _isSvg(widget.prefixIconPath!)
                         ? SvgPicture.asset(
                             widget.prefixIconPath!,
-                            colorFilter: ColorFilter.mode(
-                              theme.disabledColor,
-                              BlendMode.srcIn,
-                            ),
+                            colorFilter: ColorFilter.mode(theme.disabledColor, BlendMode.srcIn),
                           )
-                        : Image.asset(
-                            widget.prefixIconPath!,
-                            color: theme.disabledColor,
-                          ),
+                        : Image.asset(widget.prefixIconPath!, color: theme.disabledColor),
                   ),
             suffixIcon: widget.isPassword
                 ? InkWell(
@@ -77,22 +66,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       });
                     },
                     child: Icon(
-                      isObscured
-                          ? Icons.visibility_off_outlined
-                          : Icons.remove_red_eye_outlined,
+                      isObscured ? Icons.visibility_off_outlined : Icons.remove_red_eye_outlined,
                       color: theme.disabledColor,
                     ),
                   )
                 : null,
-            hintStyle: theme.textTheme.labelSmall!.copyWith(
-              color: theme.hintColor,
-            ),
+            hintStyle: theme.textTheme.labelSmall!.copyWith(color: theme.hintColor),
             border: _generateBorderStyle(theme),
             enabledBorder: _generateBorderStyle(theme),
-            focusedBorder: _generateBorderStyle(
-              theme,
-              color: theme.colorScheme.primary,
-            ),
+            focusedBorder: _generateBorderStyle(theme, color: theme.colorScheme.primary),
           ),
         ),
       ],
